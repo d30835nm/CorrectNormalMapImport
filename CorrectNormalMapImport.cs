@@ -6,7 +6,7 @@ namespace Yashinut.VRoid
 	/// <summary>
 	/// VRoid出力のVRMをランタイムで読み込んだときに、NormalMapを修正するクラス
 	/// </summary>
-	public class CorrectNormalMapImport:MonoBehaviour{
+	public class CorrectNormalMapImport{
 	
 		/// <summary>
 		/// VRoid用VRMのNormalMapを修正する
@@ -32,10 +32,10 @@ namespace Yashinut.VRoid
 				var tex = material.GetTexture("_BumpMap");
 				var defaultNormalMapTexture = ToTexture2D(tex);
 				
-				Destroy(tex);
+				Object.Destroy(tex);
 				//修正したNormalMapを取得
 				var correctedNormalMapTexture = CorrectNormalMap(defaultNormalMapTexture);
-				Destroy(defaultNormalMapTexture);
+				Object.Destroy(defaultNormalMapTexture);
 				// 修正したNormalMapを設定
 				material.SetTexture("_BumpMap", correctedNormalMapTexture);
 			}
