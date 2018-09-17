@@ -30,6 +30,7 @@ namespace Yashinut.VRoid
 			{
 				//　VRM/MToonシェーダーのNormalMapを取得。
 				var tex = material.GetTexture("_BumpMap");
+				if (tex == null) continue;
 				var defaultNormalMapTexture = ToTexture2D(tex);
 				
 				Object.Destroy(tex);
