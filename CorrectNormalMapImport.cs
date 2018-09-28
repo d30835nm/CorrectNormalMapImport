@@ -7,12 +7,12 @@ namespace Yashinut.VRoid
 	/// VRoid出力のVRMをランタイムで読み込んだときに、NormalMapを修正するクラス
 	/// </summary>
 	public class CorrectNormalMapImport{
-	
 		/// <summary>
 		/// VRoid用VRMのNormalMapを修正する
 		/// </summary>
 		/// <param name="vrmForVRoid"></param>
-		public static void CorrectNormalMap(GameObject vrmForVRoid)
+		/// <param name="deleteHairNormalMap"></param>
+		public static void CorrectNormalMap(GameObject vrmForVRoid,bool deleteHairNormalMap = true)
 		{	
 			var skinnedMeshRenderers = vrmForVRoid.GetComponentsInChildren<SkinnedMeshRenderer>();
 			var materials = new List<Material>();
@@ -28,9 +28,17 @@ namespace Yashinut.VRoid
 			//全てのマテリアルからNormalMapに設定されているTextureを取得する。
 			foreach (var material in materials)
 			{
+				//髪の毛のノーマルマップが入るとちらつきの症状が見られるため、deleteHairNormalMapがtrueのときは、髪の毛のみノーマルマップを削除する。
+				if (deleteHairNormalMap && material.name.Contains("Hair_00"))
+				{
+					material.SetTexture("_BumpMap",null);
+					continue;
+				}
+				
 				//　VRM/MToonシェーダーのNormalMapを取得。
 				var tex = material.GetTexture("_BumpMap");
 				if (tex == null) continue;
+				
 				var defaultNormalMapTexture = ToTexture2D(tex);
 				
 				Object.Destroy(tex);
@@ -74,10 +82,10 @@ namespace Yashinut.VRoid
 			{
 				//各ピクセルごとにNormalMap用の修正を行う。
 				var x = 1f;
-				var y = ChangeTextureType.DefaultToNormalMap[(int) (pixels[i].g * 255f)] / 255f;
-				var z = ChangeTextureType.DefaultToNormalMap[(int) (pixels[i].g * 255f)] / 255f;
-				var w = pixels[i].a;
-				
+				var y = pixels[i].g;
+				var z = pixels[i].g;
+				var w = pixels[i].r;
+
 				pixels[i] = new Color(x,y,z,w);
 			}
 	
