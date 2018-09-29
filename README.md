@@ -5,11 +5,11 @@ VRoidから出力したVRMにおいて、UniVRMを使ってランタイムでロ
 
 動作確認済環境
 
-　・VRoid v0.2.12でvrm出力
+・VRoid v0.2.12でvrm出力
  
-  ・UniVRM v0.43にてvrmランタイムロード
+・UniVRM v0.43にてvrmランタイムロード
   
-  ・Unity2017.4、Unity2018.1、Unity2018.2
+・Unity2017.4、Unity2018.1、Unity2018.2
 
 下記issueにも上がっているのでUniVRMの修正で直に治ると思いますが、とりあえずの対処として。
 https://github.com/Santarh/MToon/issues/9
