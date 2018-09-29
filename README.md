@@ -1,4 +1,7 @@
 # CorrectNormalMapImport
+※申し訳ございません、ColorSpaceも影響するようで、現状のスクリプトだと、WindowsプラットフォームのColorSpaceがGammmaの場合しか正常作動していません。
+対応次第修正します。
+
 2018/09/28時点にて確認。
 VRoidから出力したVRMにおいて、UniVRMを使ってランタイムでロードすると、
 ノーマルマップのTextureTypeがdefaultのままでロードされてしまい見た目が不自然になるのを解消するスクリプト。
